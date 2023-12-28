@@ -28,9 +28,17 @@ public class Planet {
         this.imgFileName = p.imgFileName;
     }
 
+    public double calcDistanceX(Planet p) {
+        return p.xxPos - this.xxPos;
+    }
+
+    public double calcDistanceY(Planet p) {
+        return p.yyPos - this.yyPos;
+    }
+
     public double calcDistance(Planet p) {
-        double dx = this.xxPos - p.xxPos;
-        double dy = this.yyPos - p.yyPos;
+        double dx = calcDistanceX(p);
+        double dy = calcDistanceY(p);
 
         return Math.sqrt((Math.pow(dx, 2) + Math.pow(dy, 2)));
     }
@@ -40,15 +48,38 @@ public class Planet {
     }
 
     public double calcForceExertedByX(Planet p) {
-        double dx = p.xxPos - this.xxPos;
+        double dx = calcDistanceX(p);
 
         return calcForceExertedBy(p) * (dx / calcDistance(p));
     }
 
     public double calcForceExertedByY(Planet p) {
-        double dy = p.yyPos - this.yyPos;
+        double dy = calcDistanceY(p);
 
         return calcForceExertedBy(p) * (dy / calcDistance(p));
+    }
+
+    public double calcNetForceExertedByX(Planet[] allPlanets) {
+        double sumX = 0;
+
+        for (int i = 0; i < allPlanets.length; i++) {
+            sumX = sumX + calcForceExertedByX(allPlanets[i]);
+        }
+        
+        return sumX;
+    }
+
+    public double calcNetForceExertedByY(Planet[] allPlanets) {
+        double sumY = 0;
+
+        for (Planet allPlanet : allPlanets) {
+            if (this.equals(allPlanet)) {
+                continue;
+            }
+            sumY = sumY + calcForceExertedByY(allPlanet);
+        }
+        
+        return sumY;
     }
 
 }
