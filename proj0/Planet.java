@@ -62,8 +62,11 @@ public class Planet {
     public double calcNetForceExertedByX(Planet[] allPlanets) {
         double sumX = 0;
 
-        for (int i = 0; i < allPlanets.length; i++) {
-            sumX = sumX + calcForceExertedByX(allPlanets[i]);
+        for (Planet allPlanet : allPlanets) {
+            if (this.equals(allPlanet)) {
+                continue;
+            }
+            sumX = sumX + calcForceExertedByX(allPlanet);
         }
         
         return sumX;
