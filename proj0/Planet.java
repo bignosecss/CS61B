@@ -28,6 +28,7 @@ public class Planet {
         this.imgFileName = p.imgFileName;
     }
 
+    // --------- Add myself ----------------
     public double calcDistanceX(Planet p) {
         return p.xxPos - this.xxPos;
     }
@@ -35,6 +36,8 @@ public class Planet {
     public double calcDistanceY(Planet p) {
         return p.yyPos - this.yyPos;
     }
+
+    // -------------------------------------
 
     public double calcDistance(Planet p) {
         double dx = calcDistanceX(p);
@@ -83,6 +86,20 @@ public class Planet {
         }
         
         return sumY;
+    }
+
+    public void update(double dt, double fX, double fY) {
+        // Step1: Calculate the acceleration
+        double aX = fX / this.mass;
+        double aY = fY / this.mass;
+
+        // Step2: Calculate the new velocity
+        this.xxVel = this.xxVel + dt * aX;
+        this.yyVel = this.yyVel + dt * aY;
+
+        // Step3: Calculate the new position
+        this.xxPos = this.xxPos + dt * this.xxVel;
+        this.yyPos = this.yyPos + dt * this.yyVel;
     }
 
 }
