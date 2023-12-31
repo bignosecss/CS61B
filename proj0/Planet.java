@@ -28,7 +28,7 @@ public class Planet {
         this.imgFileName = p.imgFileName;
     }
 
-    // --------- Add myself ----------------
+    // ------ self-defined method ---------
     public double calcDistanceX(Planet p) {
         return p.xxPos - this.xxPos;
     }
