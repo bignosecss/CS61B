@@ -9,6 +9,15 @@ public class Planet {
     public double mass;
     public String imgFileName;
 
+    /**
+     * Constructor 1
+     * @param xP
+     * @param yP
+     * @param xV
+     * @param yV
+     * @param m
+     * @param img
+     */
     public Planet(double xP, double yP, double xV, 
                 double yV, double m, String img) {
         this.xxPos = xP;
@@ -19,6 +28,10 @@ public class Planet {
         this.imgFileName = img;
     }
 
+    /**
+     * Constructor 2
+     * @param p
+     */
     public Planet(Planet p) {
         this.xxPos = p.xxPos;
         this.yyPos = p.yyPos;
@@ -39,6 +52,11 @@ public class Planet {
 
     // -------------------------------------
 
+    /**
+     * Calculate the distance between two Planets.
+     * @param p
+     * @return
+     */
     public double calcDistance(Planet p) {
         double dx = calcDistanceX(p);
         double dy = calcDistanceY(p);
@@ -46,22 +64,44 @@ public class Planet {
         return Math.sqrt((Math.pow(dx, 2) + Math.pow(dy, 2)));
     }
 
+    /**
+     * Takes in a Planets, and returns a double describing the force exerted on this planet
+     * by the given planet.
+     * @param p
+     * @return
+     */
     public double calcForceExertedBy(Planet p) {
         return (Planet.G * this.mass * p.mass) / Math.pow(calcDistance(p), 2);
     }
 
+    /**
+     * Returns the force exerted in the X directions.
+     * @param p
+     * @return
+     */
     public double calcForceExertedByX(Planet p) {
         double dx = calcDistanceX(p);
 
         return calcForceExertedBy(p) * (dx / calcDistance(p));
     }
 
+    /**
+     * Returns the force exerted in the Y directions.
+     * @param p
+     * @return
+     */
     public double calcForceExertedByY(Planet p) {
         double dy = calcDistanceY(p);
 
         return calcForceExertedBy(p) * (dy / calcDistance(p));
     }
 
+    /**
+     * Takes in an array of Planets and calculate the net X force exerted by all planets
+     * in that array upon the current planet.
+     * @param allPlanets
+     * @return
+     */
     public double calcNetForceExertedByX(Planet[] allPlanets) {
         double sumX = 0;
 
@@ -75,6 +115,12 @@ public class Planet {
         return sumX;
     }
 
+    /**
+     * Takes in an array of Planets and calculate the net Y force exerted by all planets
+     * in that array upon the current planet.
+     * @param allPlanets
+     * @return
+     */
     public double calcNetForceExertedByY(Planet[] allPlanets) {
         double sumY = 0;
 
@@ -88,6 +134,14 @@ public class Planet {
         return sumY;
     }
 
+    /**
+     * Determines how much the forces exerted on the planet will cause that planet
+     * to accelerate, and the resulting change in the planet's velocity and position
+     * in a small period of time dt.
+     * @param dt
+     * @param fX
+     * @param fY
+     */
     public void update(double dt, double fX, double fY) {
         // Step1: Calculate the acceleration
         double aX = fX / this.mass;

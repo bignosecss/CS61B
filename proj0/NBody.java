@@ -1,5 +1,11 @@
 public class NBody {
 
+    /**
+     * Takes in a file name, returns a double corresponding to the radius
+     * of the universe in that file.
+     * @param planetsTxtPath
+     * @return
+     */
     public static double readRadius(String planetsTxtPath) {
         In in = new In(planetsTxtPath);
 
@@ -9,6 +15,12 @@ public class NBody {
         return radiusOfUniverse;
     }
 
+    /**
+     * Takes in a file name, returns an array of Planets corresponding to
+     * the planets in the file.
+     * @param planetsTxtPath
+     * @return
+     */
     public static Planet[] readPlanets(String planetsTxtPath) {
         In in  = new In(planetsTxtPath);
 
