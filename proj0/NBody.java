@@ -31,4 +31,26 @@ public class NBody {
         return planets;
     }
 
+    public static void main(String[] args) {
+
+        // Store the 0th and 1st command line arguments.
+        double T = Double.parseDouble(args[0]);
+        double dt = Double.parseDouble(args[1]);
+
+        // Store the 2nd command line argument.
+        String filename = args[2];
+
+        // Read planets and universe radius
+        Planet[] planets = readPlanets(filename);
+        double universeRadius = readRadius(filename);
+
+        // Draw the background iamge
+        StdDraw.setScale(-universeRadius, universeRadius);
+
+        StdDraw.clear();
+        StdDraw.picture(0, 0, "images/starfield.jpg");
+        StdDraw.show();
+
+    }
+
 }
