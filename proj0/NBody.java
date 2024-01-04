@@ -44,7 +44,6 @@ public class NBody {
     }
 
     public static void main(String[] args) {
-
         // Store the 0th and 1st command line arguments.
         double T = Double.parseDouble(args[0]);
         double dt = Double.parseDouble(args[1]);
@@ -62,6 +61,11 @@ public class NBody {
         StdDraw.clear();
         StdDraw.picture(0, 0, "images/starfield.jpg");
         StdDraw.show();
+
+        for (Planet planet : planets) {
+            System.out.println(planet.imgFileName);
+            planet.draw();
+        }
 
     }
 
