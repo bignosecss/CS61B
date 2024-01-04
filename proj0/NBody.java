@@ -57,13 +57,12 @@ public class NBody {
 
         // Draw the background iamge
         StdDraw.setScale(-universeRadius, universeRadius);
-
         StdDraw.clear();
         StdDraw.picture(0, 0, "images/starfield.jpg");
         StdDraw.show();
 
+        /* Draw the planets */
         for (Planet planet : planets) {
-            System.out.println(planet.imgFileName);
             planet.draw();
         }
 

@@ -164,7 +164,6 @@ public class Planet {
      */
     public void draw() {
         /* Draw a single planet */
-        StdDraw.clear();
         StdDraw.picture(this.xxPos, this.yyPos, "images/" + this.imgFileName);
         StdDraw.show();
     }
