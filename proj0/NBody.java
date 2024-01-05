@@ -82,10 +82,10 @@ public class NBody {
         }
         StdDraw.show();
 
-        System.out.println("Original x position of each planet: ");
-        for (Planet planet : planets) {
-            System.out.println(planet.xxPos);
-        }
+        // System.out.println("Original x position of each planet: ");
+        // for (Planet planet : planets) {
+        //     System.out.println(planet.xxPos);
+        // }
 
         double timeOfUniverse = 0;
         while (timeOfUniverse != T) {
