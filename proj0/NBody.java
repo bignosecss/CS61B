@@ -40,10 +40,28 @@ public class NBody {
             planets[rows] = new Planet(xxPos, yyPos, xxVel, yyVel, mass, planetImgFileName);
         }
 
+        // System.out.println("number of planets: " + numberOfPlanets + " or " + planets.length);
+        // All two are correct.
+
         return planets;
     }
 
+    /**
+     * Draw the background image.
+     * Added myself. Not required.
+     * @param universeRadius
+     * @param imgPath
+     */
+    public static void drawBackgroundImage(double universeRadius, String imgPath) {
+        StdDraw.setScale(-universeRadius, universeRadius);
+        StdDraw.clear();
+        StdDraw.picture(0, 0, imgPath);
+        StdDraw.show();
+    }
+
     public static void main(String[] args) {
+        StdDraw.enableDoubleBuffering();
+
         // Store the 0th and 1st command line arguments.
         double T = Double.parseDouble(args[0]);
         double dt = Double.parseDouble(args[1]);
@@ -56,16 +74,54 @@ public class NBody {
         double universeRadius = readRadius(filename);
 
         // Draw the background iamge
-        StdDraw.setScale(-universeRadius, universeRadius);
-        StdDraw.clear();
-        StdDraw.picture(0, 0, "images/starfield.jpg");
-        StdDraw.show();
+        drawBackgroundImage(universeRadius, "images/starfield.jpg");
 
-        /* Draw the planets */
+        /* Draw the planets and show */
         for (Planet planet : planets) {
             planet.draw();
         }
+        StdDraw.show();
 
+        System.out.println("Original x position of each planet: ");
+        for (Planet planet : planets) {
+            System.out.println(planet.xxPos);
+        }
+
+        double timeOfUniverse = 0;
+        while (timeOfUniverse != T) {
+
+            // Here, the initial is the point!
+            double[] xForces = new double[planets.length];
+            double[] yForces = new double[planets.length];
+
+            // Calculate the net x and y forces for each planet.
+            for(int i = 0; i < planets.length; i++) {
+                // Here the exception comes. No, Look up the two initial statements!
+                xForces[i] = planets[i].calcNetForceExertedByX(planets);
+                yForces[i] = planets[i].calcNetForceExertedByY(planets);
+
+                /*
+                System.out.println("Updated x position of each planet: ");
+                for (Planet planet : planets) {
+                    System.out.println(planet.xxPos);
+                }
+                */
+            }
+            for (int i = 0; i < planets.length; i++) {
+                planets[i].update(dt, xForces[i], yForces[i]);
+            }
+            // Draw the background iamge
+            drawBackgroundImage(universeRadius, "images/starfield.jpg");
+    
+            /* Draw the planets and show */
+            for (Planet planet : planets) {
+                planet.draw();
+            }
+            StdDraw.show();
+            StdDraw.pause(10);
+
+            timeOfUniverse = timeOfUniverse + dt;
+        }
     }
 
 }

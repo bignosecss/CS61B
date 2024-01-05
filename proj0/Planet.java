@@ -105,11 +105,11 @@ public class Planet {
     public double calcNetForceExertedByX(Planet[] allPlanets) {
         double sumX = 0;
 
-        for (Planet allPlanet : allPlanets) {
-            if (this.equals(allPlanet)) {
+        for (Planet planet : allPlanets) {
+            if (this.equals(planet)) {
                 continue;
             }
-            sumX = sumX + calcForceExertedByX(allPlanet);
+            sumX = sumX + calcForceExertedByX(planet);
         }
         
         return sumX;
@@ -124,11 +124,11 @@ public class Planet {
     public double calcNetForceExertedByY(Planet[] allPlanets) {
         double sumY = 0;
 
-        for (Planet allPlanet : allPlanets) {
-            if (this.equals(allPlanet)) {
+        for (Planet planet : allPlanets) {
+            if (this.equals(planet)) {
                 continue;
             }
-            sumY = sumY + calcForceExertedByY(allPlanet);
+            sumY = sumY + calcForceExertedByY(planet);
         }
         
         return sumY;
@@ -162,10 +162,9 @@ public class Planet {
      * 
      * Takes in no parameters and return nothing.
      */
-    public void draw() {
+    public void draw() {        
         /* Draw a single planet */
         StdDraw.picture(this.xxPos, this.yyPos, "images/" + this.imgFileName);
-        StdDraw.show();
     }
 
 }
