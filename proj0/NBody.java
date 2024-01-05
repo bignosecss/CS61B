@@ -59,6 +59,22 @@ public class NBody {
         StdDraw.show();
     }
 
+    /**
+     * Print the Universe
+     * @param planets
+     * @param universeRadius
+     */
+    public static void printUniverse(Planet[] planets, double universeRadius) {
+        // Print out the Universe
+        StdOut.printf("%d\n", planets.length);
+        StdOut.printf("%.2e\n", universeRadius);
+        for (int i = 0; i < planets.length; i++) {
+            StdOut.printf("%11.4e %11.4e %11.4e %11.4e %11.4e %12s\n", 
+                          planets[i].xxPos, planets[i].yyPos, planets[i].xxVel,
+                          planets[i].yyVel, planets[i].mass, planets[i].imgFileName);
+        }
+    }
+
     public static void main(String[] args) {
         StdDraw.enableDoubleBuffering();
 
@@ -122,6 +138,7 @@ public class NBody {
 
             timeOfUniverse = timeOfUniverse + dt;
         }
+        printUniverse(planets, universeRadius);
     }
 
 }
