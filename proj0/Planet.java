@@ -1,6 +1,6 @@
 public class Planet {
 
-    public static double G = 6.67e-11;
+    private static double G = 6.67e-11;
 
     public double xxPos;
     public double yyPos;
@@ -42,11 +42,11 @@ public class Planet {
     }
 
     // ------ self-defined method ---------
-    public double calcDistanceX(Planet p) {
+    private double calcDistanceX(Planet p) {
         return p.xxPos - this.xxPos;
     }
 
-    public double calcDistanceY(Planet p) {
+    private double calcDistanceY(Planet p) {
         return p.yyPos - this.yyPos;
     }
 

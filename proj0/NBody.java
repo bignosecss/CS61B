@@ -52,7 +52,7 @@ public class NBody {
      * @param universeRadius
      * @param imgPath
      */
-    public static void drawBackgroundImage(double universeRadius, String imgPath) {
+    private static void drawBackgroundImage(double universeRadius, String imgPath) {
         StdDraw.setScale(-universeRadius, universeRadius);
         StdDraw.clear();
         StdDraw.picture(0, 0, imgPath);
@@ -64,7 +64,7 @@ public class NBody {
      * @param planets
      * @param universeRadius
      */
-    public static void printUniverse(Planet[] planets, double universeRadius) {
+    private static void printUniverse(Planet[] planets, double universeRadius) {
         // Print out the Universe
         StdOut.printf("%d\n", planets.length);
         StdOut.printf("%.2e\n", universeRadius);
