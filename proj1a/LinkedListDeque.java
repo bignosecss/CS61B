@@ -26,7 +26,16 @@ public class LinkedListDeque<T> {
         sentinel.prev = sentinel.next;
         size = 1;
     }
-    // public LinkedListDeque(LinkedListDeque other) {}
+    public LinkedListDeque(LinkedListDeque other) {
+        sentinel = new Node(null, null, null);
+        sentinel.prev = sentinel;
+        sentinel.next = sentinel;
+        size = 0;
+
+        for (int i = 0; i < other.size(); i++) {
+            this.addLast((T) other.get(i));
+        }
+    }
 
     public void addFirst(T item) {
         Node newNode = new Node(sentinel, item, sentinel.next);
@@ -63,6 +72,7 @@ public class LinkedListDeque<T> {
         T removedItem = sentinel.next.item;
         sentinel.next = sentinel.next.next;
         sentinel.next.next.prev = sentinel;
+        size -= 1;
         return removedItem;
     }
 
@@ -70,16 +80,17 @@ public class LinkedListDeque<T> {
         T removedItem = sentinel.prev.item;
         sentinel.prev.prev.next = sentinel;
         sentinel.prev = sentinel.prev.prev;
+        size -= 1;
         return removedItem;
     }
 
     public T get(int index) {
-        if (index >= size) {
+        if (index >= size || index < 0) {
             return null;
         }
 
         int i = 0;
-        Node n = sentinel;
+        Node n = sentinel.next;
         while (i != index) {
             n = n.next;
             i += 1;
@@ -87,10 +98,16 @@ public class LinkedListDeque<T> {
         return n.item;
     }
 
-    public T getRecursive(int index) {
-        if (index == 0) {
-            return sentinel.next.item;
+    private T getRecursiveHelper(Node current, int targetIndex, int currentIndex) {
+        if (currentIndex == targetIndex) {
+            return current.item;
         }
-        return getRecursive(index - 1);
+        return getRecursiveHelper(current.next, targetIndex, currentIndex + 1);
+    }
+    public T getRecursive(int index) {
+        if (index >= size || index < 0) {
+            return null;
+        }
+        return getRecursiveHelper(sentinel.next, index, 0);
     }
 }
