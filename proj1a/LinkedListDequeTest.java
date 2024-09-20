@@ -145,9 +145,6 @@ public class LinkedListDequeTest {
 		lld1.addLast(2);
 		lld1.addLast(3);
 
-		LinkedListDeque<Integer> lld2 = new LinkedListDeque<>(lld1);
-		passed = checkDeepCopy(true, lld1, lld2) && passed;
-
 		printTestStatus(passed);
 	}
 

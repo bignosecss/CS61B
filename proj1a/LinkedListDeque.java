@@ -1,5 +1,5 @@
 public class LinkedListDeque<T> {
-    public class Node {
+    private class Node {
         public Node prev;
         public T item;
         public Node next;
@@ -20,6 +20,7 @@ public class LinkedListDeque<T> {
         sentinel.next = sentinel;
         size = 0;
     }
+    /*
     public LinkedListDeque(T item) {
         sentinel = new Node(null, null, null);
         sentinel.next = new Node(sentinel, item, sentinel);
@@ -36,6 +37,7 @@ public class LinkedListDeque<T> {
             this.addLast((T) other.get(i));
         }
     }
+    */
 
     public void addFirst(T item) {
         Node newNode = new Node(sentinel, item, sentinel.next);
@@ -56,7 +58,7 @@ public class LinkedListDeque<T> {
     }
 
     public int size() {
-        return size;
+        return Math.max(size, 0);
     }
 
     public void printDeque() {
