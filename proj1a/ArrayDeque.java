@@ -1,18 +1,18 @@
-public class ArrayDeque<Item> {
-    private Item[] items;
+public class ArrayDeque<T> {
+    private T[] items;
     private int size;
     private int nextFirst;
     private int nextLast;
 
     public ArrayDeque() {
-        items = (Item[]) new Object[8];
+        items = (T[]) new Object[8];
         size = 0;
         nextFirst = Math.floorDiv(items.length, 2);
         nextLast = nextFirst + 1;
     }
 
     private void resize(int capacity) {
-        Item[] i = (Item[]) new Object[capacity];
+        T[] i = (T[]) new Object[capacity];
         // When it's full, the value of nextLast is the index of the first element
         System.arraycopy(items, nextLast, i, 0, size - nextLast);
         System.arraycopy(items, 0, i, size - nextLast, nextLast);
@@ -20,7 +20,7 @@ public class ArrayDeque<Item> {
         nextFirst = items.length - 1;
         nextLast = size;
     }
-    public void addFirst(Item item) {
+    public void addFirst(T item) {
         if (size == items.length) {
             resize(size * 2);
         }
@@ -28,7 +28,7 @@ public class ArrayDeque<Item> {
         items[nextFirst] = item;
         nextFirst = nextFirst == 0 ? items.length - 1 : nextFirst - 1;
     }
-    public void addLast(Item item) {
+    public void addLast(T item) {
         if (size == items.length) {
             resize(size * 2);
         }
@@ -52,23 +52,23 @@ public class ArrayDeque<Item> {
         }
     }
 
-    public Item removeFirst() {
-        Item removedItem = items[nextFirst + 1];
+    public T removeFirst() {
+        T removedItem = items[nextFirst + 1];
         items[nextFirst + 1] = null;
         nextFirst += 1;
         size -= 1;
         return removedItem;
     }
 
-    public Item removeLast() {
-        Item removedItem = items[nextLast - 1];
+    public T removeLast() {
+        T removedItem = items[nextLast - 1];
         items[nextLast - 1] = null;
         nextLast -= 1;
         size -= 1;
         return removedItem;
     }
 
-    public Item get(int index) {
+    public T get(int index) {
         if (index < 0 || index >= size) {
             return null;
         }
