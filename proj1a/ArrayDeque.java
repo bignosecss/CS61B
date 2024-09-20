@@ -42,7 +42,7 @@ public class ArrayDeque<T> {
     }
 
     public int size() {
-        return size;
+        return Math.max(size, 0);
     }
 
     public void printDeque() {
