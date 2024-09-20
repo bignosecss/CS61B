@@ -52,19 +52,26 @@ public class ArrayDeque<T> {
         }
     }
 
+    private void halve() {
+        double R = (double) size / items.length;
+        if (items.length > 16 && R <= 0.25) {
+            resize(items.length / 2);
+        }
+    }
     public T removeFirst() {
         T removedItem = items[nextFirst + 1];
         items[nextFirst + 1] = null;
         nextFirst += 1;
         size -= 1;
+        halve();
         return removedItem;
     }
-
     public T removeLast() {
         T removedItem = items[nextLast - 1];
         items[nextLast - 1] = null;
         nextLast -= 1;
         size -= 1;
+        halve();
         return removedItem;
     }
 
