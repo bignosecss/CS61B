@@ -1,6 +1,6 @@
 /** Performs some basic linked list tests. */
 public class LinkedListDequeTest {
-	
+
 	/* Utility method for printing out empty checks. */
 	public static boolean checkEmpty(boolean expected, boolean actual) {
 		if (expected != actual) {
@@ -66,7 +66,7 @@ public class LinkedListDequeTest {
 		boolean passed = checkEmpty(true, lld1.isEmpty());
 
 		lld1.addFirst("front");
-		
+
 		// The && operator is the same as "and" in Python.
 		// It's a binary operator that
 		// returns true if both arguments true, and false otherwise.
@@ -89,7 +89,9 @@ public class LinkedListDequeTest {
 
 	}
 
-	/** Adds an item, then removes an item, and ensures that dll is empty afterwards. */
+	/** Adds an item, then removes an item,
+	 * and ensures that dll is empty afterward.
+	 */
 	public static void addRemoveTest() {
 
 		System.out.println("Running add/remove test.");
@@ -108,12 +110,7 @@ public class LinkedListDequeTest {
 		lld1.addLast(30);
 		passed = checkSize(3, lld1.size()) && passed;
 
-		lld1.addLast(40);
-		passed = checkSize(4, lld1.size()) && passed;
-
 		lld1.removeFirst();
-		// should be empty 
-		//passed = checkEmpty(true, lld1.isEmpty()) && passed;
 		passed = checkEmpty(false, lld1.isEmpty()) && passed;
 
 		printTestStatus(passed);

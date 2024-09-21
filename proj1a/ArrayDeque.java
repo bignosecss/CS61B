@@ -72,6 +72,7 @@ public class ArrayDeque<T> {
         items[indexOfFirstItem] = null;
         nextFirst = indexOfFirstItem;
         size -= 1;
+        halve();
         return removedItem;
     }
     public T removeLast() {
@@ -83,6 +84,7 @@ public class ArrayDeque<T> {
         items[indexOfLastItem] = null;
         nextLast = indexOfLastItem;
         size -= 1;
+        halve();
         return removedItem;
     }
 
