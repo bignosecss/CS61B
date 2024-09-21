@@ -42,15 +42,22 @@ public class ArrayDequeTest {
 
         ad1.addFirst(1);
         ad1.addLast(2);
+        ad1.addLast(3);
+        ad1.addLast(4);
+        ad1.addLast(5);
+        ad1.addLast(6);
+        ad1.addLast(7);
+        ad1.addLast(8);
         passed = checkEmpty(false, ad1.isEmpty()) && passed;
-        passed = checkSize(2, ad1.size()) && passed;
+        passed = checkSize(8, ad1.size()) && passed;
 
-        ad1.addFirst(0);
-        passed = checkSize(3, ad1.size()) && passed;
+        passed = checkIndex(0, 1, ad1.get(0)) && passed;
 
-        passed = checkIndex(0, 0, ad1.get(0));
+        ad1.addLast(9);
+        passed = checkSize(9, ad1.size()) && passed;
+        passed = checkIndex(8, 9, ad1.get(8)) && passed;
 
-        // ad1.printDeque();
+        ad1.printDeque();
 
         printTestStatus(passed);
     }

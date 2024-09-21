@@ -12,11 +12,16 @@ public class ArrayDeque<T> {
     }
 
     private void resize(int capacity) {
-        T[] i = (T[]) new Object[capacity];
-        // When it's full, the value of nextLast is the index of the first element
-        System.arraycopy(items, nextLast, i, 0, size - nextLast);
-        System.arraycopy(items, 0, i, size - nextLast, nextLast);
-        items = i;
+        T[] tmp = (T[]) new Object[capacity];
+        int startOfDeque = nextFirst == items.length - 1 ? 0 : nextFirst + 1;
+        int endOfDeque = nextLast == 0 ? items.length - 1 : nextLast - 1;
+        if (startOfDeque < endOfDeque) {
+            System.arraycopy(items, startOfDeque, tmp, 0, size);
+        } else {
+            System.arraycopy(items, startOfDeque, tmp, 0, items.length - startOfDeque);
+            System.arraycopy(items, 0, tmp, items.length - startOfDeque, endOfDeque + 1);
+        }
+        items = tmp;
         nextFirst = items.length - 1;
         nextLast = size;
     }
@@ -59,19 +64,25 @@ public class ArrayDeque<T> {
         }
     }
     public T removeFirst() {
-        T removedItem = items[nextFirst + 1];
-        items[nextFirst + 1] = null;
-        nextFirst += 1;
+        if (isEmpty()) {
+            return null;
+        }
+        int indexOfFirstItem = nextFirst == items.length - 1 ? 0 : nextFirst + 1;
+        T removedItem = items[indexOfFirstItem];
+        items[indexOfFirstItem] = null;
+        nextFirst = indexOfFirstItem;
         size -= 1;
-        halve();
         return removedItem;
     }
     public T removeLast() {
-        T removedItem = items[nextLast - 1];
-        items[nextLast - 1] = null;
-        nextLast -= 1;
+        if (isEmpty()) {
+            return null;
+        }
+        int indexOfLastItem = nextLast == 0 ? items.length - 1 : nextLast - 1;
+        T removedItem = items[indexOfLastItem];
+        items[indexOfLastItem] = null;
+        nextLast = indexOfLastItem;
         size -= 1;
-        halve();
         return removedItem;
     }
 
@@ -79,7 +90,8 @@ public class ArrayDeque<T> {
         if (index < 0 || index >= size) {
             return null;
         }
-        int actualIndex = (nextFirst + 1 + index) % items.length;
+        int indexOfFirstItem = nextFirst == items.length - 1 ? 0 : nextFirst + 1;
+        int actualIndex = (indexOfFirstItem + index) % items.length;
         return items[actualIndex];
     }
 }
